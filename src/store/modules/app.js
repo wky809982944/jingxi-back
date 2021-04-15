@@ -25,6 +25,10 @@ const mutations = {
   },
   TOGGLE_DEVICE: (state, device) => {
     state.device = device
+  },
+  // 新增
+  SET_MENUS: (state, menus) => {
+    state.menus = menus
   }
 }
 

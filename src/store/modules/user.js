@@ -1,6 +1,7 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+import {setCookie} from '@/utils/cookieUtils'
 
 const getDefaultState = () => {
   return {
@@ -35,7 +36,10 @@ const actions = {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
+        let expireDays = 1000 * 60 * 60*24*7 ;
         setToken(data.token)
+        setCookie('mid',response.data.mid,expireDays)
+        setCookie('sid',response.data.sid,expireDays)
         resolve()
       }).catch(error => {
         reject(error)
@@ -50,7 +54,7 @@ const actions = {
         const { data } = response
 
         if (!data) {
-          return reject('Verification failed, please Login again.')
+          return reject('验证失败, 请重新登录.')
         }
 
         const { name, avatar } = data

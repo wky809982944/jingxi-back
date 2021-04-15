@@ -36,6 +36,7 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    disableHostCheck: true, // 使用内网穿透时需要开启，不检查host
     before: require('./mock/mock-server.js')
   },
   configureWebpack: {

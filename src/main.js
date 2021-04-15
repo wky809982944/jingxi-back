@@ -4,7 +4,7 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n
 
 import '@/styles/index.scss' // global css
 
@@ -32,12 +32,27 @@ if (process.env.NODE_ENV === 'production') {
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
+import 'xe-utils'
+import VXETable from 'vxe-table'
+import 'vxe-table/lib/style.css'
+import axios from 'axios'
+import VCharts from 'v-charts-v2'
+Vue.use(VCharts)
 
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts;
+Vue.prototype.$axios = axios
+Vue.use(VXETable)
 Vue.config.productionTip = false
-
+import moment from 'moment'; //导入模块
+moment.locale('zh-cn'); //设置语言 或 moment.lang('zh-cn');
+Vue.prototype.$moment = moment;//赋值使用
+import less from 'less'
+Vue.use(less)
 new Vue({
   el: '#app',
   router,
   store,
   render: h => h(App)
 })
+
